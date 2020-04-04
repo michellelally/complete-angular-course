@@ -15,6 +15,10 @@ export class FavouriteComponent implements OnInit {
     this.iconClass = this.isFavourite ? "glyphicon glyphicon-star-empty" : "glyphicon glyphicon-star";
   }
 
+  onClickTwo(){
+    this.isFavourite = !this.isFavourite;
+  }
+
   constructor() { }
 
 
