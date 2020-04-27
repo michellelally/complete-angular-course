@@ -12,6 +12,12 @@ export class AppComponent {
     isFavourite: true
   }
 
+  tweet = {
+    body: 'Fuck corona',
+    isLiked: false,
+    likesCount: 0
+  }
+
   onFavouriteChange(eventArgs: FavouriteChangeEventArgs) {
     console.log("Favourite Changed: ", eventArgs);
   }
