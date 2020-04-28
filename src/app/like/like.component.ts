@@ -8,8 +8,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class LikeComponent {
 
-  @Input() likesCount: number;
-  @Input() isActive: boolean;
+  @Input('likesCount') likesCount: number;
+  @Input('isActive') isActive: boolean;
 
   iconClass = "glyphicon glyphicon-heart";
 
