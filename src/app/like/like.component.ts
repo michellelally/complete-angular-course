@@ -10,23 +10,13 @@ export class LikeComponent {
 
   @Input() likesCount: number;
   @Input() isActive: boolean;
-  @Output('change') click = new EventEmitter();
-
-
 
   iconClass = "glyphicon glyphicon-heart";
-  
 
   onClick(){
-    this.isActive = !this.isActive;
-    this.click.emit({ newValue: this.isActive});
-  //  this.iconClass = this.isSelected ? "glyphicon glyphicon-heart-empty" : "glyphicon glyphicon-heart";
-  }
-
-  onClickTwo(){
+    this.likesCount += (this.isActive) ? -1 : +1;
     this.isActive = !this.isActive;
   }
-
 
   constructor() { }
 

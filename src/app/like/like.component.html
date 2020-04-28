@@ -1,3 +1,8 @@
-<h1><span [class]="iconClass" (click)="onClick()"></span></h1>
-
-<div [ngClass]="showheart ? 'liked' : 'not_liked'"></div>
+<h1>
+    <span 
+    [class]="iconClass" 
+    [class.icon]="!isActive"
+    [class.liked]="isActive" (click)="onClick()">
+    </span>
+    {{likesCount}}
+</h1>
