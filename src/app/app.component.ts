@@ -7,17 +7,7 @@ import { FavouriteChangeEventArgs } from './favourite/favourite.component';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  post = {
-    title: "Title",
-    isFavourite: true
-  }
+  viewMode = 'sdgsdv';
 
-  tweet = {
-    body: "...",
-    isLiked: true,
-    likesCount: 10
-  }
-
-  courses = [];
 
 }
