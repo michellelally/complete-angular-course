@@ -1,1 +1,11 @@
-<h1><span [class]="iconClass" (click)="onClick()"></span></h1>
+<h1>
+    <span class="glyphicon"
+    [ngClass]= "{
+        'glyphicon-star': isFavourite,
+        'glyphicon-star-empty': !isFavourite
+    }" 
+    (click)="onClick()">
+
+</span>
+</h1>
+

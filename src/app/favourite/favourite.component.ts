@@ -17,7 +17,7 @@ export class FavouriteComponent{
   onClick(){
     this.isFavourite = !this.isFavourite;
     this.click.emit({ newValue: this.isFavourite});
-    this.iconClass = this.isFavourite ? "glyphicon glyphicon-star-empty" : "glyphicon glyphicon-star";
+   // this.iconClass = this.isFavourite ? "glyphicon glyphicon-star-empty" : "glyphicon glyphicon-star";
   }
 
   onClickTwo(){
