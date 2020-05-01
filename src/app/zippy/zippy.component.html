@@ -1,0 +1,17 @@
+<div class="zippy">
+  <div class="zippy-title" 
+  [class.expanded]="isExpanded" 
+  [ngStyle]="{
+    'backgroundColor': isExpanded ? 'gray' : 'white'
+  }"
+  (click)="onClick()">
+    {{ title }}
+    <span class="fa" [ngClass]="{
+          'fa-chevron-up': isExpanded,
+          'fa-chevron-down': !isExpanded
+        }"></span>
+  </div>
+  <div *ngIf="isExpanded" class="zippy-body">
+    {{ title }}
+  </div>
+</div>
