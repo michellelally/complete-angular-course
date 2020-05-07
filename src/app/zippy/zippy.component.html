@@ -1,17 +1,11 @@
-<div class="zippy">
-  <div class="zippy-title" 
-  [class.expanded]="isExpanded" 
-  [ngStyle]="{
-    'backgroundColor': isExpanded ? 'gray' : 'white'
-  }"
-  (click)="onClick()">
+<div class="panel panel-default">
+  <div class="panel-heading container-fluid " (click)="isExpanded=!isExpanded"
+    [ngClass]="isExpanded? 'bg-transparent' : 'bg-light'">
     {{ title }}
-    <span class="fa" [ngClass]="{
-          'fa-chevron-up': isExpanded,
-          'fa-chevron-down': !isExpanded
-        }"></span>
+    <span class="glyphicon" style="float:right"
+      [ngClass]="isExpanded? 'glyphicon-chevron-up': 'glyphicon-chevron-down'"></span>
   </div>
-  <div *ngIf="isExpanded" class="zippy-body">
-    {{ title }}
-  </div>
+  <div class="panel-body" [hidden]="!isExpanded">
+    <ng-content></ng-content>
+</div>
 </div>
