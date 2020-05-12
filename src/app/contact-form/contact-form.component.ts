@@ -5,9 +5,9 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './contact-form.component.html',
   styleUrls: ['./contact-form.component.scss']
 })
-export class ContactFormComponent {
+export class ContactFormComponent   {
 
-  constructor() { }
-
-
+  log(x){
+    console.log(x);
+  }
 }
