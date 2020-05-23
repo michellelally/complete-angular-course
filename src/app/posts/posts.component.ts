@@ -1,58 +1,57 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
+import { PostService } from '../services/post.service';
+
 
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.scss']
 })
-export class PostsComponent  {
+export class PostsComponent implements OnInit {
 
   posts: any[];
-
   private url = 'https://jsonplaceholder.typicode.com/posts';
 
-  constructor(private http: Http) {
-    http.get(this.url)
-    .subscribe(response => {
-      this.posts = response.json();
-    })
+  constructor(private ps: PostService) {
+
   }
 
-  createPost(input: HTMLInputElement){
-    let post:any = { title: input.value };
+  ngOnInit() {
+    this.ps.getPosts().subscribe(
+      response => {
+        this.posts = response.json();
+      }
+    )
+  }
+
+  createPost(input: HTMLInputElement) {
+    let post: any = { title: input.value };
     input.value = '';
-;
-    this.http.post(this.url, JSON.stringify(post))
-    .subscribe(response => {
-      post.id = response.json().id;
-      this.posts.splice(0, 0, post);
-
-    })
+    this.ps.createPost(post)
+      .subscribe(response => {
+        post.id = response.json().id;
+      })
+    this.posts.splice(0, 0, post);
   }
 
-  updatePost(post){
-    // put is to send the whole object to the server 
-    //this.http.put(this.url, JSON.stringify(post))
-    // patch is used to send a few properties of an object to server
-    this.http.patch(this.url + '/' + post.id, JSON.stringify({ isRead: true }))
+  updatePost(post) {
+    this.ps.updatePost(post)
       .subscribe(response => {
         console.log(response.json());
       })
-
   }
 
-  deletePost(post){
-    // put is to send the whole object to the server 
-    //this.http.put(this.url, JSON.stringify(post))
-    // patch is used to send a few properties of an object to server
-    this.http.delete(this.url + '/' + post.id)
+  deletePost(post) {
+    this.ps.deletePost(post.id)
       .subscribe(response => {
-        let index = this.posts.indexOf(post);
-        this.posts.splice(index, 1);
+        console.log(response.json());
       })
-
+    let index = this.posts.indexOf(post);
+    this.posts.splice(index, 1);
   }
+
+
+
 
 
 }
