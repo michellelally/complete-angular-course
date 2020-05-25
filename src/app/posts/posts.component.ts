@@ -20,6 +20,9 @@ export class PostsComponent implements OnInit {
     this.ps.getPosts().subscribe(
       response => {
         this.posts = response.json();
+      }, error => {
+        alert('An unexpected error occured');
+        console.log(error);
       }
     )
   }
@@ -28,23 +31,38 @@ export class PostsComponent implements OnInit {
     let post: any = { title: input.value };
     input.value = '';
     this.ps.createPost(post)
-      .subscribe(response => {
+      .subscribe(
+        response => {
         post.id = response.json().id;
+      }, 
+      error => {
+        alert('An unexpected error occured');
+        console.log(error);
       })
     this.posts.splice(0, 0, post);
   }
 
   updatePost(post) {
     this.ps.updatePost(post)
-      .subscribe(response => {
+      .subscribe(
+        response => {
         console.log(response.json());
+      }, 
+      error => {
+        alert('An unexpected error occured');
+        console.log(error);
       })
   }
 
   deletePost(post) {
     this.ps.deletePost(post.id)
-      .subscribe(response => {
+      .subscribe(
+        response => {
         console.log(response.json());
+      }, 
+      error => {
+        alert('An unexpected error occured');
+        console.log(error);
       })
     let index = this.posts.indexOf(post);
     this.posts.splice(index, 1);
