@@ -4,7 +4,6 @@ import { AppError } from '../common/app-error';
 import { NotFoundError } from '../common/not-found-error';
 import { BadInput } from '../common/bad-input';
 
-
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
@@ -15,59 +14,50 @@ export class PostsComponent implements OnInit {
   posts: any[];
   private url = 'https://jsonplaceholder.typicode.com/posts';
 
-  constructor(private ps: PostService) {
-
-  }
+  constructor(private ps: PostService) { }
 
   ngOnInit() {
     this.ps.getAll().subscribe(
-      response => {
-        this.posts = response.json();
-      });
+      posts => this.posts = posts);
   }
 
   createPost(input: HTMLInputElement) {
     let post: any = { title: input.value };
+    this.posts.splice(0, 0, post);
     input.value = '';
 
     this.ps.create(post)
       .subscribe(
-        response => {
-        post['id'] = response.json().id;
-      }, 
-      (error: AppError) => {
-        if (error instanceof BadInput){ 
-          //this.form.setErrors(error.originalError);       
-        } 
-        else throw error;
-      })
-    this.posts.splice(0, 0, post);
+        newPost => post['id'] = newPost.json().id,
+        (error: AppError) => {
+          this.posts.splice(0, 1);
+          if (error instanceof BadInput) {
+            //this.form.setErrors(error.originalError);       
+          }
+          else throw error;
+        })
+
   }
 
   updatePost(post) {
     this.ps.update(post)
       .subscribe(
-        response => {
-        console.log(response.json());
-      });
+        updatedPost => console.log(updatedPost.json())
+      );
   }
 
   deletePost(post) {
-    this.ps.delete('99999/99999')
+    let index = this.posts.indexOf(post);
+    this.posts.splice(index, 1);
+    this.ps.delete(post.id)
       .subscribe(
-        response => {
-          let index = this.posts.indexOf(post);
-          this.posts.splice(index, 1);
-      }, 
-      (error: AppError) => {
-        if (error instanceof NotFoundError)
-          alert('Post has already been deleted')
-        else throw error;
-      })
+        null,
+        (error: AppError) => {
+          this.posts.splice(index, 0, post);
+          if (error instanceof NotFoundError)
+            alert('Post has already been deleted')
+          else throw error;
+        })
   }
-
-
-
-
 
 }
