@@ -23,29 +23,23 @@ export class PostsComponent implements OnInit {
     this.ps.getPosts().subscribe(
       response => {
         this.posts = response.json();
-      }, error => {
-        alert('An unexpected error occured');
-        console.log(error);
-      }
-    )
+      });
   }
 
   createPost(input: HTMLInputElement) {
     let post: any = { title: input.value };
     input.value = '';
+
     this.ps.createPost(post)
       .subscribe(
         response => {
-        post.id = response.json().id;
+        post['id'] = response.json().id;
       }, 
       (error: AppError) => {
         if (error instanceof BadInput){ 
-          // how to log error to form 
-          // this.form.setErrors(error.json())
-
-        }
-        alert('An unexpected error occured');
-        console.log(error);
+          //this.form.setErrors(error.originalError);       
+        } 
+        else throw error;
       })
     this.posts.splice(0, 0, post);
   }
@@ -55,15 +49,11 @@ export class PostsComponent implements OnInit {
       .subscribe(
         response => {
         console.log(response.json());
-      }, 
-      error => {
-        alert('An unexpected error occured');
-        console.log(error);
-      })
+      });
   }
 
   deletePost(post) {
-    this.ps.deletePost(post.id)
+    this.ps.deletePost('99999/99999')
       .subscribe(
         response => {
           let index = this.posts.indexOf(post);
@@ -72,12 +62,8 @@ export class PostsComponent implements OnInit {
       (error: AppError) => {
         if (error instanceof NotFoundError)
           alert('Post has already been deleted')
-        else {  
-          alert('An unexpected error occured');
-          console.log(error);
-        }
+        else throw error;
       })
-
   }
 
 

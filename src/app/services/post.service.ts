@@ -30,15 +30,17 @@ export class PostService {
     //this.http.put(this.url, JSON.stringify(post))
     // patch is used to send a few properties of an object to server
     return this.http.patch(this.url + '/' + post.id, JSON.stringify({ isRead: true }))
-
+    .pipe(catchError(this.errorHandler))
   }
 
   deletePost(id) {
-    return this.http.delete(this.url + '/' + id)
+      console.log(id);
+      return this.http.delete(this.url + '/' + id)
       .pipe(catchError(this.errorHandler))
   }
 
   errorHandler(error: HttpErrorResponse) {
+    console.log("ERROR HANDLER STATUS: " + error.status)
     if (error.status === 404)
       return throwError(new NotFoundError());
     else if (error.status === 400)
