@@ -9,7 +9,6 @@ import { UsersService } from '../services/users.service';
 export class FollowersComponent implements OnInit {
 
   users: any[];
-  private url = 'https://api.github.com/users/michellelally/followers';
 
   constructor(private service: UsersService) { }
 
@@ -17,7 +16,7 @@ export class FollowersComponent implements OnInit {
     this.service.getAll().subscribe(
       users => this.users = users);
   }
-  
+
 
 
 
