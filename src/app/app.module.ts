@@ -28,6 +28,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { GithubProfileComponent } from './github-profile/github-profile.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ArchivesComponent } from './archives/archives.component';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
     NavbarComponent,
     HomeComponent,
     GithubProfileComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ArchivesComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -63,16 +67,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
         component: HomeComponent 
       },
       { 
-        path: 'followers/:id/:username' , 
-        component: GithubProfileComponent 
-      },
-      { 
-        path: 'followers' , 
-        component: FollowersComponent 
-      },
-      { 
-        path: 'posts' , 
-        component: PostsComponent 
+        path: 'archive/:year/:month' , 
+        component: ArchivesComponent 
       },
       { 
         // ** represents a wildcard 
@@ -85,7 +81,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
   providers: [
     AuthorsService,
     PostService, 
-    { provide: ErrorHandler, useClass: AppErrorHandler }
+    { provide: ErrorHandler, useClass: AppErrorHandler },
   ],
   bootstrap: [AppComponent]
 })
