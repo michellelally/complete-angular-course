@@ -63,12 +63,16 @@ import { NotFoundComponent } from './not-found/not-found.component';
         component: HomeComponent 
       },
       { 
+        path: 'followers/:username' , 
+        component: GithubProfileComponent 
+      },
+      { 
         path: 'followers' , 
         component: FollowersComponent 
       },
       { 
-        path: 'profile/:username' , 
-        component: GithubProfileComponent 
+        path: 'posts' , 
+        component: PostsComponent 
       },
       { 
         // ** represents a wildcard 
