@@ -3,6 +3,7 @@ import { UsersService } from '../services/users.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, observable } from 'rxjs';
 import { combineLatest } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-followers',
@@ -20,22 +21,19 @@ export class FollowersComponent implements OnInit {
       this.route.paramMap,
       this.route.queryParamMap
     ])
+      .pipe(
+        switchMap(combined => {
+          let id = combined[0].get('id');
+          let page = combined[1].get('page');
 
-    this.service.getAll().subscribe(
-      users => this.users = users);
-
-    this.route.paramMap
-      .subscribe(params => {
-
-      });
-
-    this.route.queryParamMap
-      .subscribe(params => {
-
-      });
+          return this.service.getAll();
+        }))
+      .subscribe(users => this.users = users);
   }
-
-
-
-
 }
+  
+
+
+
+
+
