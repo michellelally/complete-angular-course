@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Pipe, ErrorHandler } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -54,7 +55,28 @@ import { NotFoundComponent } from './not-found/not-found.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule, 
-    HttpModule
+    HttpModule, 
+    RouterModule.forRoot([
+      { 
+        // '' refers to home page
+        path: '' , 
+        component: HomeComponent 
+      },
+      { 
+        path: 'followers' , 
+        component: FollowersComponent 
+      },
+      { 
+        path: 'profile/:username' , 
+        component: GithubProfileComponent 
+      },
+      { 
+        // ** represents a wildcard 
+        //must be at the end of routes or every page will be picked up as a wildcard
+        path: '**' , 
+        component: NotFoundComponent 
+      }
+    ])
   ],
   providers: [
     AuthorsService,
