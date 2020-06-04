@@ -29,6 +29,11 @@ import { HomeComponent } from './home/home.component';
 import { GithubProfileComponent } from './github-profile/github-profile.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ArchivesComponent } from './archives/archives.component';
+import { AdminComponent } from './admin/admin.component';
+import { HelpersComponent } from './helpers/helpers.component';
+import { LoginComponent } from './login/login.component';
+import { NoAccessComponent } from './no-access/no-access.component';
+import { SignupComponent } from './signup/signup.component';
 
 
 @NgModule({
@@ -53,6 +58,11 @@ import { ArchivesComponent } from './archives/archives.component';
     GithubProfileComponent,
     NotFoundComponent,
     ArchivesComponent,
+    AdminComponent,
+    HelpersComponent,
+    LoginComponent,
+    NoAccessComponent,
+    SignupComponent,
     
   ],
   imports: [
