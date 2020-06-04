@@ -1,14 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Pipe, ErrorHandler } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { HttpModule, BaseRequestOptions, Http } from '@angular/http';
 import { RouterModule } from '@angular/router'
+import { AuthHttp, AUTH_PROVIDERS, provideAuth, AuthConfig } from 'angular2-jwt/angular2-jwt';
+import { MockBackend } from '@angular/http/testing';
+import { fakeBackendProvider } from './helpers/fake-backend';
+import { AuthorsService } from './services/authors.service';
+import { CoursesService } from './course/course.service';
+import { PostService } from './services/post.service';
+import { AuthService } from './services/auth.service';
+import { OrderService } from './services/order.service';
+
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CourseComponent } from './course/course.component';
-import { CoursesService } from './course/course.service';
 import { AuthorsComponent } from './authors/authors.component';
-import { AuthorsService } from './services/authors.service';
 import { FormsModule } from '@angular/forms';
 import { SummaryPipe } from './summary.pipe';
 import { FavouriteComponent } from './favourite/favourite.component';
@@ -21,7 +29,6 @@ import { ZippyComponent } from './zippy/zippy.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { CourseFormComponent } from './course-form/course-form.component';
 import { PostsComponent } from './posts/posts.component';
-import { PostService } from './services/post.service';
 import { AppErrorHandler } from './common/app-error-handler';
 import { FollowersComponent } from './followers/followers.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -30,10 +37,10 @@ import { GithubProfileComponent } from './github-profile/github-profile.componen
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ArchivesComponent } from './archives/archives.component';
 import { AdminComponent } from './admin/admin.component';
-import { HelpersComponent } from './helpers/helpers.component';
 import { LoginComponent } from './login/login.component';
 import { NoAccessComponent } from './no-access/no-access.component';
 import { SignupComponent } from './signup/signup.component';
+
 
 
 @NgModule({
@@ -59,7 +66,6 @@ import { SignupComponent } from './signup/signup.component';
     NotFoundComponent,
     ArchivesComponent,
     AdminComponent,
-    HelpersComponent,
     LoginComponent,
     NoAccessComponent,
     SignupComponent,
@@ -71,27 +77,25 @@ import { SignupComponent } from './signup/signup.component';
     FormsModule, 
     HttpModule, 
     RouterModule.forRoot([
-      { 
-        // '' refers to home page
-        path: '' , 
-        component: HomeComponent 
-      },
-      { 
-        path: 'archive/:year/:month' , 
-        component: ArchivesComponent 
-      },
-      { 
-        // ** represents a wildcard 
-        //must be at the end of routes or every page will be picked up as a wildcard
-        path: '**' , 
-        component: NotFoundComponent 
-      }
+      { path: '', component: HomeComponent },
+      { path: 'admin', component: AdminComponent },
+      { path: 'login', component: LoginComponent },
+      { path: 'no-access', component: NoAccessComponent }
     ])
   ],
   providers: [
     AuthorsService,
     PostService, 
     { provide: ErrorHandler, useClass: AppErrorHandler },
+    OrderService,
+
+    AuthService,
+
+    // For creating a mock back-end. You don't need these in a real app. 
+    fakeBackendProvider,
+    MockBackend,
+    BaseRequestOptions
+    
   ],
   bootstrap: [AppComponent]
 })
