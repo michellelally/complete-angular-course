@@ -10,6 +10,9 @@ import { CoursesService } from './course/course.service';
 import { PostService } from './services/post.service';
 import { AuthService } from './services/auth.service';
 import { OrderService } from './services/order.service';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 
@@ -76,6 +79,7 @@ import { SignupComponent } from './signup/signup.component';
     AppRoutingModule,
     FormsModule, 
     HttpModule, 
+    HttpClientModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'admin', component: AdminComponent },
@@ -94,7 +98,8 @@ import { SignupComponent } from './signup/signup.component';
     // For creating a mock back-end. You don't need these in a real app. 
     fakeBackendProvider,
     MockBackend,
-    BaseRequestOptions
+    BaseRequestOptions,
+    HttpClient
     
   ],
   bootstrap: [AppComponent]
