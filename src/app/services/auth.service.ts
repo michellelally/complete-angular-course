@@ -20,6 +20,9 @@ export class AuthService {
   }
  
   logout() {
+    // delete saved token 
+    // existence of valid token is a  logged in user
+    localStorage.removeItem('token');
   }
  
   isLoggedIn() {
