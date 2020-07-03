@@ -44,6 +44,7 @@ import { LoginComponent } from './login/login.component';
 import { NoAccessComponent } from './no-access/no-access.component';
 import { SignupComponent } from './signup/signup.component';
 import { AuthGuard } from './services/auth-guard.service';
+import { AdminAuthGaurd } from './services/admin-auth-gaurd.service';
 
 
 
@@ -83,7 +84,7 @@ import { AuthGuard } from './services/auth-guard.service';
     HttpClientModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
-      { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
+      { path: 'admin', component: AdminComponent, canActivate: [AuthGuard, AdminAuthGaurd] },
       { path: 'login', component: LoginComponent },
       { path: 'no-access', component: NoAccessComponent }
     ])
@@ -101,7 +102,8 @@ import { AuthGuard } from './services/auth-guard.service';
     MockBackend,
     BaseRequestOptions,
     HttpClient,
-    AuthGuard
+    AuthGuard,
+    AdminAuthGaurd
     
   ],
   bootstrap: [AppComponent]
