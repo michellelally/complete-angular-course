@@ -12,6 +12,8 @@ import { AuthService } from './services/auth.service';
 import { OrderService } from './services/order.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
+import { FollowersService } from './followers/followers.service';
+
 
 
 
@@ -45,6 +47,9 @@ import { NoAccessComponent } from './no-access/no-access.component';
 import { SignupComponent } from './signup/signup.component';
 import { AuthGuard } from './services/auth-guard.service';
 import { AdminAuthGaurd } from './services/admin-auth-gaurd.service';
+import { AboutComponent } from './about/about.component';
+
+
 
 
 
@@ -74,6 +79,7 @@ import { AdminAuthGaurd } from './services/admin-auth-gaurd.service';
     LoginComponent,
     NoAccessComponent,
     SignupComponent,
+    AboutComponent,
     
   ],
   imports: [
@@ -84,9 +90,7 @@ import { AdminAuthGaurd } from './services/admin-auth-gaurd.service';
     HttpClientModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
-      { path: 'admin', component: AdminComponent, canActivate: [AuthGuard, AdminAuthGaurd] },
-      { path: 'login', component: LoginComponent },
-      { path: 'no-access', component: NoAccessComponent }
+      { path: 'followers', component: FollowersComponent }
     ])
   ],
   providers: [
@@ -94,17 +98,16 @@ import { AdminAuthGaurd } from './services/admin-auth-gaurd.service';
     PostService, 
     { provide: ErrorHandler, useClass: AppErrorHandler },
     OrderService,
-
     AuthService,
-
     // For creating a mock back-end. You don't need these in a real app. 
     fakeBackendProvider,
     MockBackend,
     BaseRequestOptions,
     HttpClient,
     AuthGuard,
-    AdminAuthGaurd
-    
+    AdminAuthGaurd,
+    FollowersService
+       
   ],
   bootstrap: [AppComponent]
 })
