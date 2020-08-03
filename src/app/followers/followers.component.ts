@@ -32,7 +32,7 @@ export class FollowersComponent implements OnInit {
       .subscribe(followers => this.followers = followers);
   }
 }
-  
+
 
 
 
