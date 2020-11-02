@@ -7,8 +7,5 @@ import { FavouriteChangeEventArgs } from './favourite/favourite.component';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
-    zippy = {
-      title: 'Title'
-    };
+ title = 'app';
 }

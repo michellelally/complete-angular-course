@@ -20,12 +20,14 @@ export class ArchivesComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
+    // use snpshot when don't need to subscribe, not returning an observable, not getting data from http
     let params = this.route.snapshot.paramMap;
     this.year = +params.get('year');
     this.month = +params.get('month');
   }
 
   viewAll() {
+    // refers to home page , all navigation must have forward slash
     this.router.navigate(['/']);
   }
 

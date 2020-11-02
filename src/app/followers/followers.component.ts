@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, observable } from 'rxjs';
 import { combineLatest } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+import { FollowersService } from './followers.service'
 
 @Component({
   selector: 'app-followers',
@@ -12,9 +13,9 @@ import { map, switchMap } from 'rxjs/operators';
 })
 export class FollowersComponent implements OnInit {
 
-  users: any[];
+  followers: any[];
 
-  constructor(private service: UsersService, private route: ActivatedRoute) { }
+  constructor(private service: FollowersService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     combineLatest([
@@ -26,12 +27,12 @@ export class FollowersComponent implements OnInit {
           let id = combined[0].get('id');
           let page = combined[1].get('page');
 
-          return this.service.getAll();
+          return this.service.getFollowers();
         }))
-      .subscribe(users => this.users = users);
+      .subscribe(followers => this.followers = followers);
   }
 }
-  
+
 
 
 

@@ -1,21 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { AuthService } from './../services/auth.service';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-home',
+  selector: 'home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
-  archives = [
-    { year: 2017, month: 1},
-    { year: 2017, month: 2},
-    { year: 2017, month: 3},
-  ]
+  title = "Angular App";
 
-  constructor() { }
 
-  ngOnInit(): void {
-  }
+  constructor(public authService: AuthService) { }
+
 
 }
